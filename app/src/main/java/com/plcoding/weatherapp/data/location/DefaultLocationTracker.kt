@@ -39,7 +39,7 @@ class DefaultLocationTracker @Inject constructor(
             return null
         }
 
-        return suspendCancellableCoroutine { const ->
+        return suspendCancellableCoroutine { cont ->
             locationClient.lastLocation.apply {
                 if (isComplete) {
                     if (isSuccessful) {
