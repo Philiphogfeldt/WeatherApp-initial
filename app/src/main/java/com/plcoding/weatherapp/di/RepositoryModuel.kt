@@ -1,19 +1,21 @@
 package com.plcoding.weatherapp.di
 
-import com.plcoding.weatherapp.data.location.DefaultLocationTracker
+import com.plcoding.weatherapp.data.remote.WeatherApi
 import com.plcoding.weatherapp.data.repository.WeatherRepositoryImpl
-import com.plcoding.weatherapp.domain.location.LocationTracker
 import com.plcoding.weatherapp.domain.repository.WeatherRepository
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoryModuel {
-    @Binds
+object RepositoryModule {
+
+    @Provides
     @Singleton
-    abstract fun bindWeatherRepository(weatherRepositoryImpl: WeatherRepositoryImpl): WeatherRepository
+    fun providesWeatherRepository(api: WeatherApi): WeatherRepository {
+        return WeatherRepositoryImpl(api)
+    }
 }
