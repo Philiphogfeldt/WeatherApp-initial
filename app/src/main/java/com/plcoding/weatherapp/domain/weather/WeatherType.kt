@@ -3,7 +3,7 @@ package com.plcoding.weatherapp.domain.weather
 import androidx.annotation.DrawableRes
 import com.plcoding.weatherapp.R
 
-sealed class WeatherType(
+open class WeatherType(
     val weatherDesc: String,
     @DrawableRes val iconRes: Int
 ) {

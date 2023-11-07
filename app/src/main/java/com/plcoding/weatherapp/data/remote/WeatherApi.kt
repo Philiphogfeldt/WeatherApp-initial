@@ -6,9 +6,10 @@ import retrofit2.http.Query
 
 interface WeatherApi {
 
-    @GET("https://api.open-meteo.com/v1/forecast?")
-    suspend fun  getWeatherData(
+    @GET("v1/forecast")
+    suspend fun getWeatherData(
         @Query("latitude") lat: Double,
-        @Query("longitude") long: Double
-    ):WeatherDto
+        @Query("longitude") long: Double,
+        @Query("current") current: String = "weathercode"
+    ): WeatherDto
 }
