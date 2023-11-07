@@ -42,10 +42,10 @@ class DefaultLocationTracker @Inject constructor(
         if (!hasAccessCoarseLocationPermission || !hasAccessFineLocationPermission){
             Log.d("LocationPermission", "Location permissions are not granted.")
         }
-        if (!isGpsEnabled){
+        else if (!isGpsEnabled){
             Log.d("GPSStatus", "GPS is not enabled.")
         }
-        if (!isNetworkEnable){
+        else if (!isNetworkEnable){
             Log.d("NetworkStatus", "Network is not enabled.")
         }
 

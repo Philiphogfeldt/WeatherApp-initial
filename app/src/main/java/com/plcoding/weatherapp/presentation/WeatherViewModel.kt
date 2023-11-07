@@ -23,9 +23,8 @@ class WeatherViewModel @Inject constructor(
         private set
 
     var latitude by mutableStateOf<Double?>(null)
-        private set
     var longitude by mutableStateOf<Double?>(null)
-        private set
+
 
     fun loadWeatherInfo(){
        viewModelScope.launch {
