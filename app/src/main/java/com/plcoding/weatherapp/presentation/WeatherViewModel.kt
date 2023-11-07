@@ -27,9 +27,6 @@ class WeatherViewModel @Inject constructor(
     var latitude by mutableStateOf<Double?>(null)
     var longitude by mutableStateOf<Double?>(null)
 
-
-
-
     fun loadWeatherInfo() {
         viewModelScope.launch {
             state = state.copy(
@@ -47,7 +44,6 @@ class WeatherViewModel @Inject constructor(
                             isLoading = false,
                             error = null
                         )
-                        var currentWeatherType = result.data?.currentWeatherData?.weatherType
                     }
                     is Resource.Error -> {
                         state = state.copy(
