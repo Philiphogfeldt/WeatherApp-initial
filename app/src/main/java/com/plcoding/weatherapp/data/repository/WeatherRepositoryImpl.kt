@@ -23,7 +23,9 @@ class WeatherRepositoryImpl @Inject constructor(
         }
     }
 
-    /*override suspend fun getWeatherData(lat: Double, long: Double): Resource<WeatherInfo> {
+}
+
+/*    override suspend fun getWeatherData(lat: Double, long: Double): Resource<WeatherInfo> {
         return try {
             Resource.Success(
                 data = api.getWeatherData(
@@ -35,5 +37,5 @@ class WeatherRepositoryImpl @Inject constructor(
             e.printStackTrace()
             Resource.Error(e.message ?: "An unknown error occurred.")
         }
-    }*/
-}
+    }
+}*/

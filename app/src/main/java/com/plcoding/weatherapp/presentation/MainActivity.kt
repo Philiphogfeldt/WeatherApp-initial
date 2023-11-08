@@ -7,27 +7,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.plcoding.weatherapp.presentation.ui.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.lifecycle.ViewModel as viewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -55,12 +45,36 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(Color.DarkGray)
                 ) {
-                    WeatherCard(
-                        state = viewModel.state,
-                        backgroundColor = Color.Red)
-
+                    // Here we check the state and decide what to display
+                    if (viewModel.state.isLoading) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+                    } else if (viewModel.state.error != null) {
+                        Text(
+                            "Error: ${viewModel.state.error}",
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(16.dp)
+                        )
+                    } else if (viewModel.state.weatherInfo?.currentWeatherData != null) {
+                        WeatherCard(
+                            state = viewModel.state,
+                            backgroundColor = Color.Red
+                        )
+                    } else {
+                        Text(
+                            "No weather data available",
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(16.dp)
+                        )
+                    }
                 }
             }
         }
     }
 }
+

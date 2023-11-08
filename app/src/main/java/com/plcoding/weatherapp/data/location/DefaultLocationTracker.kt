@@ -20,7 +20,7 @@ import kotlin.math.log
 @ExperimentalCoroutinesApi
 class DefaultLocationTracker @Inject constructor(
     @ApplicationContext
-    private val context: Context
+    private val context: Context,
 
 ): LocationTracker {
     private val locationClient = FusedLocationProviderClient(context)
