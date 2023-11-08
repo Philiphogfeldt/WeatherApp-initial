@@ -50,7 +50,16 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             WeatherAppTheme {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.DarkGray)
+                ) {
+                    WeatherCard(
+                        state = viewModel.state,
+                        backgroundColor = Color.Red)
 
+                }
             }
         }
     }
