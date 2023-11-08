@@ -24,6 +24,6 @@ object AppModuel {
             .baseUrl("https://open-meteo.com/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-            .create(WeatherApi::class.java)
+            .create()
     }
 }

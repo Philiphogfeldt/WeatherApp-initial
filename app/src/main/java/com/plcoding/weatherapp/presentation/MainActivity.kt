@@ -42,96 +42,16 @@ class MainActivity : ComponentActivity() {
         ) {
             viewModel.loadWeatherInfo()
         }
-        permissionLauncher.launch(arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-        ))
+        permissionLauncher.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            )
+        )
         setContent {
             WeatherAppTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.DarkGray)
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Your Location",
-                            color = Color.White,
-                            textAlign = TextAlign.Center
-                        )
-                        Text(
-                            text = "Latitude: ${viewModel.latitude ?: "Loading..."}",
-                            color = Color.White,
-                            textAlign = TextAlign.Center
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = "Longitude: ${viewModel.longitude ?: "Loading..."}",
-                            color = Color.White,
-                            textAlign = TextAlign.Center
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
 
-
-                        //WeatherSearchInput(viewModel = viewModel)
-                    }
-
-                    if (viewModel.state.isLoading) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-
-                    viewModel.state.error?.let { error ->
-                        Text(
-                            text = error,
-                            color = Color.Red,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-                }
             }
         }
     }
 }
-
-@Composable
-fun WeatherSearchInput(viewModel: WeatherViewModel) {
-    var latitude by remember { mutableStateOf("") }
-    var longitude by remember { mutableStateOf("") }
-
-    Column {
-        Text(
-            text = "Search for Weather",
-            color = Color.White,
-            textAlign = TextAlign.Center
-        )
-        TextField(
-            value = latitude,
-            onValueChange = { latitude = it },
-            label = { Text("Latitude") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = longitude,
-            onValueChange = { longitude = it },
-            label = { Text("Longitude") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = {
-            viewModel.searchWeatherByCoordinates(latitude.toDoubleOrNull() ?: 0.0, longitude.toDoubleOrNull() ?: 0.0)
-        }) {
-            Text("Search")
-        }
-    }
-}
-
-
-
